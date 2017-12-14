@@ -1,4 +1,4 @@
-# -*- coding : utf-8 -*-
+# -*- coding:utf-8 -*-
 """
 Search Engine
     配置文件
@@ -39,7 +39,7 @@ class DevConfig(Config):
     """
     DEBUG=True
     SQLALCHEMY_DATABASE_URI=os.environ.get("DEV_DATABASE_URL") or \
-        "mysql+pymysql://root:pqc19960320@120.77.220.239:32770/SimplePing"
+        "mysql+pymysql://root:pqc19960320@120.77.220.239:32770/Test"
 
 config={
     "default":DevConfig

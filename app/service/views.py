@@ -1,13 +1,21 @@
-from flask import jsonify,Response
+# -*- coding:utf-8 -*-
+from flask import jsonify,request,render_template
 from . import service
-from app.models import Movies
-from manage import crawl
+from app.models import MovieInfo
+from manage import retriever
 from app import db
-import json
 
-@service.route('/simpleping')
+
+@service.route('/',methods=["GET","POST"])
 def index():
-   pass
+    if request.method=="GET":
+        return render_template('service/search.html')
+    elif request.method=="POST":
+        keywords=request.form.get("keywords")
+        shortcuts=retriever(keywords)
+        flag=True if len(shortcuts) else False
+        return render_template("service/results.html",flag=flag,results=shortcuts)
+        # return jsonify(shortcuts)
 
 
 
