@@ -3,7 +3,7 @@
 """
 数据库迁移：
     python manage.py db init
-    python manage.py db migrate -m "information about this migrate"
+    python manage.py db migrate -m "key information"
     python manage.py db upgrade
 
 建立索引：
@@ -63,7 +63,7 @@ def indexer():
     indexDir = SimpleFSDirectory(File("index/"))
     writerConfig = IndexWriterConfig(Version.LUCENE_4_10_1, StandardAnalyzer())
     writer = IndexWriter(indexDir, writerConfig)
-    movies = MovieInfo.query.limit(100).all()
+    movies = MovieInfo.query.limit(10000).all()
     print("Index starting...")
     for n, l in enumerate(movies):
         doc = Document()
@@ -92,7 +92,7 @@ def retriever(keyword):
     searcher = IndexSearcher(reader)
 
     query = QueryParser(Version.LUCENE_4_10_1, "shortcut", analyzer).parse(keyword)
-    MAX = 5
+    MAX = 100
     hits = searcher.search(query, MAX)
 
     print("Found %d document(s) that matched query '%s':" % (hits.totalHits, query))
