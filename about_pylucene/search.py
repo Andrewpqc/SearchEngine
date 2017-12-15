@@ -9,11 +9,11 @@ FIELD_PATH = "path"
 
 QUERY_STRING = "lucene and restored"
 
-STORE_DIR = "/home/kanaujia/lucene_index"
+STORE_DIR = "/home/andrew/lucene_index"
 
 if __name__ == '__main__':
     initVM()
-    print 'lucene', VERSION
+    print('lucene', VERSION)
 
     # Get handle to index directory
     directory = SimpleFSDirectory(File(STORE_DIR))
@@ -41,7 +41,7 @@ if __name__ == '__main__':
 
     # Get top hits
     scoreDocs = topDocs.scoreDocs
-    print "%s total matching documents." % len(scoreDocs)
+    print("%s total matching documents." % len(scoreDocs))
 
     for scoreDoc in scoreDocs:
         doc = searcher.doc(scoreDoc.doc)

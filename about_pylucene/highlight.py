@@ -41,19 +41,19 @@ if __name__ == '__main__':
     scoreDocs = topDocs.scoreDocs
     print "%s total matching documents." % len(scoreDocs)
 
-    HighlightFormatter = SimpleHTMLFormatter();
+    HighlightFormatter = SimpleHTMLFormatter()
     query_score = QueryScorer (query)
 
     highlighter = Highlighter(HighlightFormatter, query_score)
 
     # Set the fragment size. We break text in to fragment of 64 characters
-    fragmenter  = SimpleSpanFragmenter(query_score, 64);
-    highlighter.setTextFragmenter(fragmenter);
+    fragmenter  = SimpleSpanFragmenter(query_score, 64)
+    highlighter.setTextFragmenter(fragmenter)
 
     for scoreDoc in scoreDocs:
         doc = searcher.doc(scoreDoc.doc)
-    text = doc.get(FIELD_CONTENTS)
-    ts = analyzer.tokenStream(FIELD_CONTENTS, StringReader(text))
+        text = doc.get(FIELD_CONTENTS)
+        ts = analyzer.tokenStream(FIELD_CONTENTS, StringReader(text))
         print doc.get(FIELD_PATH)
         print highlighter.getBestFragments(ts, text, 3, "...")
     print ""

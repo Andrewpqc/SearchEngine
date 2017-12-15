@@ -1,12 +1,12 @@
 import lucene
 
 if __name__ == '__main__':
-    INDEX_DIR = "/home/kanaujia/lucene_index"
+    INDEX_DIR = "/home/andrew/lucene_index"
 
  # Initialize lucene and JVM
     lucene.initVM()
 
-    print "lucene version is:", lucene.VERSION
+    print ("lucene version is:", lucene.VERSION)
 
   # Get the analyzer
     analyzer = lucene.StandardAnalyzer(lucene.Version.LUCENE_CURRENT)
@@ -30,5 +30,5 @@ if __name__ == '__main__':
     # Add the document to the index
         writer.addDocument(doc)
 
-except Exception, e:
-    print "Failed in indexDocs:", e
+    except Exception as e:
+        print("Failed in indexDocs:", e)

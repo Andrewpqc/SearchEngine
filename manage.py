@@ -1,13 +1,13 @@
 #-*- coding:utf-8 -*-
 
 """
-启动脚本：
-    manage.py
-
 数据库迁移：
     python manage.py db init
     python manage.py db migrate -m "information about this migrate"
     python manage.py db upgrade
+
+建立索引：
+    python manage.py indexer
 
 启动程序：
     python manage.py runserver
@@ -39,7 +39,6 @@ from org.apache.lucene.util import Version
 
 # sys.setdefaultencoding('utf-8')
 
-
 app=create_app("default")
 manager=Manager(app)
 migrate=Migrate(app,db)
@@ -49,6 +48,7 @@ def make_shell_context():
     return dict(app=app,db=db,MovieInfo=MovieInfo)
 manager.add_command("shell",Shell(make_context=make_shell_context))
 manager.add_command("db",MigrateCommand)
+
 
 @manager.command
 def crawl():
@@ -78,11 +78,15 @@ def indexer():
 #～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
 #～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
+
+flag = True  #增加标志变量，实现单例模式
 @manager.command
 def retriever(keyword):
     '''查询器'''
-    result=[]
-    lucene.initVM()
+    global flag
+    if flag:
+        lucene.initVM()
+    flag=False
     analyzer = StandardAnalyzer(Version.LUCENE_4_10_1)
     reader = IndexReader.open(SimpleFSDirectory(File("index/")))
     searcher = IndexSearcher(reader)
@@ -92,11 +96,11 @@ def retriever(keyword):
     hits = searcher.search(query, MAX)
 
     print("Found %d document(s) that matched query '%s':" % (hits.totalHits, query))
+    result = []
     for hit in hits.scoreDocs:
         print(hit.score, hit.doc, hit.toString())
         doc = searcher.doc(hit.doc)
         result.append(doc.get("shortcut"))
-    reader.close()
     return result
 
 #～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
