@@ -10,7 +10,8 @@
     <ul>
         {% for result in results %}
         <br>
-        <li>{{ result }}</li>
+        <h3><a href="{{ result.1 }}">{{ result.2 }}</a></h3>
+        <li>{{ result.0 }}</li>
         <br>
         {% endfor %}
     </ul>

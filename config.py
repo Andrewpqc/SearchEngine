@@ -38,7 +38,7 @@ class DevConfig(Config):
         数据库URI配置
     """
     DEBUG=True
-    SQLALCHEMY_DATABASE_URI=os.environ.get("DEV_DATABASE_URL") or \
+    SQLALCHEMY_DATABASE_URI=os.environ.get("DEV_DATABASE_URI") or \
         "mysql+pymysql://root:pqc19960320@120.77.220.239:32770/Test"
 
 config={
