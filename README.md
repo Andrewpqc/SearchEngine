@@ -107,3 +107,9 @@ $ make
 $ sudo make install
 ```
 Be patient here!!!
+
+# Docker Image Support
+If you don't want to config the environment,here is a [docker image](https://bitbucket.org/coady/docker/src/tip/pylucene/Dockerfile?fileviewer=file-view-default) for you on dockerhub! If you have docker on your host,just to run the following command:
+``` bash
+$ docker pull coady/pylucene
+```
