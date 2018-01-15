@@ -50,7 +50,7 @@ public class LuceneIndexer {
         }
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://120.77.220.239:32770/Test", "root","pqc19960320");
+            conn = DriverManager.getConnection("jdbc:mysql://host:port/dbname", "name","pwd");
             Statement stat = conn.createStatement();
             ResultSet result = stat.executeQuery("select * from movieinfo limit 300");
             while (result.next()) {

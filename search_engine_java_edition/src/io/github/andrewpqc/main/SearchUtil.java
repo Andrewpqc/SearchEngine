@@ -71,7 +71,7 @@ public class SearchUtil{
             }
             Connection conn = null;
             try {
-                conn = DriverManager.getConnection("jdbc:mysql://120.77.220.239:32770/Test", "root", "pqc19960320");
+                conn = DriverManager.getConnection("jdbc:mysql://host:port/dbname", "yourname", "yourpwd");
                 Statement stat = conn.createStatement();
                 ResultSet result = stat.executeQuery("select * from movieinfo limit 1000");
                 while(result.next()) {
